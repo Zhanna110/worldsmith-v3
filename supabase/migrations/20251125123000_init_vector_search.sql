@@ -5,13 +5,13 @@ create extension if not exists vector;
 create table documents (
   id uuid primary key default gen_random_uuid(),
   content text,
-  embedding vector(1536), -- 1536 is the default dimension for OpenAI embeddings
+  embedding vector(768), -- 768 is the dimension for Gemini text-embedding-004
   metadata jsonb
 );
 
 -- Create a function to search for documents
 create or replace function match_documents (
-  query_embedding vector(1536),
+  query_embedding vector(768),
   match_threshold float,
   match_count int,
   filter jsonb DEFAULT '{}'
